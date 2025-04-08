@@ -1,6 +1,5 @@
 package br.com.jjnervosia.estoque.model.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +17,7 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private Permissao permissao;
 
-    public Users() {
+    public Users(Users dados) {
 
     }
 
@@ -28,6 +27,10 @@ public class Users {
         this.userName = dadosCadastroUsers.userName();
         this.password = dadosCadastroUsers.password();
         this.permissao = dadosCadastroUsers.permissao();
+    }
+
+    public Users() {
+
     }
 
     public void setNome(String nome) {

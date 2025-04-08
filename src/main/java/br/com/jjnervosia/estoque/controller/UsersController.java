@@ -1,5 +1,6 @@
 package br.com.jjnervosia.estoque.controller;
 
+import br.com.jjnervosia.estoque.model.users.DadosAtualizaUsers;
 import br.com.jjnervosia.estoque.model.users.DadosCadastroUsers;
 import br.com.jjnervosia.estoque.model.users.Users;
 import br.com.jjnervosia.estoque.service.UsersService;
@@ -29,9 +30,9 @@ public class UsersController {
         return ResponseEntity.ok().body(users);
    }
 
-   @PatchMapping
-   public ResponseEntity<Users> alterarUsuario(@RequestBody DadosCadastroUsers dados) {
-        var atualizaUser = usersService.atualizarUsuario(12L, dados);
+   @PutMapping("{id}")
+   public ResponseEntity<Users> alterarUsuario(@PathVariable Long id, @RequestBody DadosAtualizaUsers dados) {
+        var atualizaUser = usersService.atualizarUsuario(id,dados );
         return ResponseEntity.ok().body(atualizaUser);
    }
 

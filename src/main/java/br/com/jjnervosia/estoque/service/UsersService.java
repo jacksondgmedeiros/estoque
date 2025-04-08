@@ -1,5 +1,6 @@
 package br.com.jjnervosia.estoque.service;
 
+import br.com.jjnervosia.estoque.model.users.DadosAtualizaUsers;
 import br.com.jjnervosia.estoque.model.users.DadosCadastroUsers;
 import br.com.jjnervosia.estoque.model.users.Users;
 import br.com.jjnervosia.estoque.repository.UsersRepository;
@@ -32,9 +33,16 @@ public class UsersService {
         usersRepository.deleteById(id);
     }
 
-    public Users atualizarUsuario(Long id, DadosCadastroUsers dados) {
-        Users user = new Users(dados);
-        user.setUserName(dados.userName());
+    public Users atualizarUsuario(Long id, DadosAtualizaUsers dados) {
+
+        var user = usersRepository.getReferenceById(id);
+
+        if (dados.userName() != null && !dados.userName().isEmpty()) {
+            user.setUserName(dados.userName());
+        }
+        if (dados.nome() != null && !dados.nome().isEmpty()) {
+            user.setNome(dados.nome());
+        }
 
         return usersRepository.save(user);
     }
